@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	_ "github.com/lib/pq"
+	"github.com/nikishin42/toDoList/pkg/models/postgres"
 	"log"
 	"net/http"
 	"os"
@@ -19,6 +20,7 @@ type neuteredFileSystem struct {
 type application struct {
 	errorLog *log.Logger
 	infoLog  *log.Logger
+	snippets *postgres.SnippetModel
 }
 
 func main() {
@@ -38,6 +40,7 @@ func main() {
 	app := &application{
 		errorLog: errorLog,
 		infoLog:  infoLog,
+		snippets: &postgres.SnippetModel{DB: db},
 	}
 
 	// Эта структура позволяет записывать ошибки, которые происходят на сервере в errorLog
