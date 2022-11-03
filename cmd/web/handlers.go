@@ -37,7 +37,7 @@ func (app *application) showSnippet(w http.ResponseWriter, r *http.Request) {
 		app.notFound(w)
 		return
 	}
-	fmt.Fprintf(w, "Show snippet id %d", id)
+	_, _ = fmt.Fprintf(w, "Show snippet id %d", id)
 }
 
 func (app *application) createSnippet(w http.ResponseWriter, r *http.Request) {
@@ -56,5 +56,5 @@ func (app *application) createSnippet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Write([]byte("Snippet create page"))
+	http.Redirect(w, r, fmt.Sprintf("/snippet?id=%d", id), http.StatusSeeOther)
 }
